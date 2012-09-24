@@ -5,8 +5,8 @@ class CreateCards < ActiveRecord::Migration
       t.string :cost
       t.string :pow_tgh
       t.string :card_type
-      t.string :rules
-      t.string :flavor
+      t.text   :rules
+      t.text   :flavor
       t.string :illustrator
       t.string :rarity
       t.string :set_no
