@@ -9,7 +9,6 @@ require 'nokogiri'
     doc = Nokogiri::HTML(open(set_url))
     a = {}
     doc.search('table > tr').each do |row|
-      #binding.pry
       if row.search('td').size == 1 and row.search('br').size > 0 and a.size > 3
         card = Card.create a
         set.cards << card
@@ -26,7 +25,7 @@ require 'nokogiri'
         when "Type:"
           h = { card_type: row.at_xpath('td[2]').text.strip }
         when "Rules Text:"
-          h = { rules: row.at_xpath('td[2]').text.strip }
+          h = { rules: row.at_xpath('td[2]').text.strip.gsub(/\r/," ")  }
         when "Flavor Text:"
           h = { flavor: row.at_xpath('td[2]').text.strip }
         when "Illus."
