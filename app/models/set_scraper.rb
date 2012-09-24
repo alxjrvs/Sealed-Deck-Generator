@@ -2,6 +2,8 @@ class SetScraper
 require 'open-uri'
 require 'nokogiri'
 
+  $rtr = "app/assets/html/rtr.html"
+
   def self.scrape(set_url, set_name)
     set = Release.create(name: set_name)
     doc = Nokogiri::HTML(open(set_url))
