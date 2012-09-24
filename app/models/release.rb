@@ -26,17 +26,17 @@ class Release < ActiveRecord::Base
   pack = []
     uncommons = self.uncommons
     commons = self.commons
-    3.times do
-      chosen = uncommons[rand(uncommons.size)]
-      pack << chosen
-      uncommons = uncommons - [chosen]
-    end
     case rand(8)
     when 0
       p "mythic"
       pack << self.mythics.sample
     else
       pack << self.rares.sample
+    end
+    3.times do
+      chosen = uncommons[rand(uncommons.size)]
+      pack << chosen
+      uncommons = uncommons - [chosen]
     end
     case rand(15)
     when 0
