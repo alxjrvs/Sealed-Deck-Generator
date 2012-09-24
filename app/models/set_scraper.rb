@@ -6,6 +6,13 @@ require 'nokogiri'
     doc = Nokogiri::HTML(open(set_url))
     a = {}
     doc.search('table > tr').each do |row|
+      #binding.pry
+      if row.search('td').size == 1 and row.search('br').size > 0 and a.size > 3
+        Card.create a
+        a = {}
+        #misses the last card.
+        #SetScraper.scrape("http://mtgsalvation.com/printable-return-to-ravnica-spoiler.html")
+      end
       if row.at_xpath('td[2]')
         case row.at_xpath('td[1]').text.strip
         when "Name:"
@@ -28,12 +35,6 @@ require 'nokogiri'
           h = { set_no: row.at_xpath('td[2]').text.strip }
         end
         a = a.merge(h)
-        if row.search('b').size > 0 and a.size > 3 
-          Card.create a 
-          a = {}
-          #misses the last card.
-          #SetScraper.scrape("http://mtgsalvation.com/printable-return-to-ravnica-spoiler.html")
-        end
       end
     end
   end
