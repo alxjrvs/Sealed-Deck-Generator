@@ -1,5 +1,11 @@
 -@pool.each_with_index do |booster, i|
   %h1= "Booster #{i+1}"
-  %ul
-  -booster.each do |card|
-    %li= "#{card.name} - #{card.rarity}"
+  %div.booster
+    -booster.each do |card|
+      %div.card
+        %p.name= card.name
+        %p.cost= card.cost
+        %p.type= card.card_type
+        %p.rarity= card.rarity
+        %p= card.rules
+        %p= card.pow_tgh
