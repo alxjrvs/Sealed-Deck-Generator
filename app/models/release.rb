@@ -27,10 +27,9 @@ class Release < ActiveRecord::Base
     uncommons = self.uncommons
     commons = self.commons
     3.times do
-      chosen = uncommons.sample
-      binding.pry
+      chosen = uncommons[rand(uncommons.size)]
       pack << chosen
-      uncommons = uncommons.delete(chosen)
+      uncommons = uncommons - [chosen]
     end
     case rand(8)
     when 0
@@ -44,15 +43,15 @@ class Release < ActiveRecord::Base
       puts "foil"
       pack << self.cards.sample
       9.times do
-        chosen = commons.sample
+        chosen = commons[rand(commons.size)]
         pack << chosen
-        commons = commons.delete(chosen)
+        commons = commons - [chosen]
       end
     else
       10.times do
-        chosen = commons.sample
+        chosen = commons[rand(commons.size)]
         pack << chosen
-        commons = commons.delete(chosen)
+        commons = commons - [chosen]
       end
     end
     pack << self.basics.sample
