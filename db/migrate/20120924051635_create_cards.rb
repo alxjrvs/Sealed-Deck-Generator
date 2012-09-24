@@ -11,6 +11,8 @@ class CreateCards < ActiveRecord::Migration
       t.string :rarity
       t.string :set_no
 
+      t.references :release
+
       t.timestamps
     end
   end

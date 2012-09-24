@@ -2,13 +2,15 @@ class SetScraper
 require 'open-uri'
 require 'nokogiri'
 
-  def self.scrape(set_url)
+  def self.scrape(set_url, set_name)
+    set = Release.create(name: set_name)
     doc = Nokogiri::HTML(open(set_url))
     a = {}
     doc.search('table > tr').each do |row|
       #binding.pry
       if row.search('td').size == 1 and row.search('br').size > 0 and a.size > 3
-        Card.create a
+        card = Card.create a
+        set.cards << card
         a = {}
         #misses the last card.
         #SetScraper.scrape("http://mtgsalvation.com/printable-return-to-ravnica-spoiler.html")

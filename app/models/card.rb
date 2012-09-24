@@ -1,8 +1,6 @@
 class Card < ActiveRecord::Base
   attr_accessible :cost, :flavor, :illustrator, :name, :pow_tgh, :rarity, :rules, :set_no, :card_type
-  has_many :releases
-  has_many :boosters, :through => :releases
-
+  belongs_to :release
 
   def self.mythics
     Card.where("rarity = ?", "Mythic Rare")
@@ -24,7 +22,7 @@ class Card < ActiveRecord::Base
     Card.where("rarity = ?", "Basic Land")
   end
 
-  def gen_pack
+  def self.gen_pack
   pack = []
     3.times do
       pack << Card.uncommons.sample
