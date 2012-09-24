@@ -1,6 +1,10 @@
 div.card {
-  max-width: 300px;
+  width: 300px;
+  padding:10px;
+  min-height:300px;
+  background:lightgrey;
   float: left;
+  margin:2px;
 }
 
 div.booster {
@@ -8,3 +12,6 @@ div.booster {
 }
 
 p.name { float:left; width:50%; }
+p.type { float:left; width:50%; }
+p.rarity { text-align:right; float:right; width:50%; }
+p.cost { text-align:right; float:right; width:50%; }

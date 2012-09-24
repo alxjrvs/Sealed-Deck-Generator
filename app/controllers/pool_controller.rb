@@ -1,4 +1,4 @@
-class PoolController < ActionController::Base
+class PoolController < ApplicationController
 
 def index
   @pool = Release.first.gen_pool 6
