@@ -9,6 +9,8 @@
 
 # Ignore the default SQLite database.
 /db/*.sqlite3
+/public/assets/*img.jpg
+
 /app/assets/images/*img.jpg
 # Ignore all logfiles and tempfiles.
 /log/*.log
