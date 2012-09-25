@@ -1,18 +1,10 @@
 class Card < ActiveRecord::Base
-  attr_accessible :cost, :flavor, :illustrator, :name, :pow_tgh, :rarity, :rules, :set_no, :card_type
+
+  after_create :set_lazy_color, :set_lazy_rarity
+
+  attr_accessible :cost, :flavor, :illustrator, :name, :pow_tgh, :rarity, :rules, :set_no, :card_type, :lazy_color, :lazy_rarity
   belongs_to :release
-  #def lazy_sort
-    #case self.rarity
-    #when "Mythic Rare"
-      #1
-    #when "Rare"
-      #2
-    #when "Uncommon"
-      #3
-    #when "Common"
-      #4
-    #end
-  #end
+
 
   def color
     color_id = []
@@ -45,5 +37,62 @@ class Card < ActiveRecord::Base
       end
     end
   color_id.uniq
+  end
+
+  private
+
+  # Mythic Rare = 1
+  # Rare = 2
+  # Uncommon = 3
+  # Common = 4
+  # Basic Land = 5
+
+  def set_lazy_rarity
+    case self.rarity
+      when "Mythic Rare"
+        self.update_attributes(:lazy_rarity => 1)
+      when "Rare"
+        self.update_attributes(:lazy_rarity => 2)
+      when "Uncommone"
+        self.update_attributes(:lazy_rarity => 3)
+      when "Common"
+        self.update_attributes(:lazy_rarity => 4)
+      when "Basic Land"
+        self.update_attributes(:lazy_rarity => 5)
+    end
+  end
+
+
+  #White = 1
+  #Blue = 2
+  #Black = 3
+  #Red = 4
+  #Green = 5
+  #Artifact = 6
+  #Multicolor = 7
+  #Land = 8
+
+
+  def set_lazy_color
+    if self.cost.nil?
+      self.update_attributes(:lazy_color => 8)
+    elsif self.color.size > 1
+      self.update_attributes(:lazy_color => 6)
+    else
+      case self.color[0]
+        when "White"
+          self.update_attributes(:lazy_color => 1)
+        when "Blue"
+          self.update_attributes(:lazy_color => 2)
+        when "Black"
+          self.update_attributes(:lazy_color => 3)
+        when "Red"
+          self.update_attributes(:lazy_color => 4)
+        when "Green"
+          self.update_attributes(:lazy_color => 5)
+        when "Colorless"
+          self.update_attributes(:lazy_color => 7)
+      end
+    end
   end
 end
