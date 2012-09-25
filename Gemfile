@@ -32,6 +32,7 @@ group :production do
   gem 'sendgrid'
 end
 
+gem 'thin'
 gem 'nokogiri'
 gem 'heroku'
 gem 'haml-rails'

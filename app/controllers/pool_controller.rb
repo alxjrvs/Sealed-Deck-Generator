@@ -1,9 +1,9 @@
 class PoolController < ApplicationController
 
 def index
-
+  @secret = true if params[:secret] == "images"
   if params[:short_name] and params[:packs]
-    @pool = Release.find_by_short_name(params[:short_name]).gen_pool(params[:packs].to_i)
+    @pool = Release.find_by_short_name(params[:short_name].upcase).gen_pool(params[:packs].to_i)
   else
     @pool = Release.first.gen_pool 6
   end

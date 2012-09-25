@@ -12,14 +12,16 @@
     .booster
       %h1{:id => "booster_#{i+1}"}= "Booster #{i+1}"
       -booster.each do |card|
-        =image_tag "#{card.id}img.jpg"
-        -#%div{:class =>"card color_#{card.lazy_color}"}
-          -#.type_row
-            -#%p.name= card.name
-            -#%p.cost= card.cost
-          -#.type_row
-            -#%p.type= card.card_type
-            -#%p.rarity= card.rarity
-          -#%p= card.rules
-          -#%p.pt= card.pow_tgh
+        -if @secret
+          =image_tag "#{card.id}img.jpg"
+        -else
+          %div{:class =>"card color_#{card.lazy_color}"}
+            .type_row
+              %p.name= card.name
+              %p.cost= card.cost
+            .type_row
+              %p.type= card.card_type
+              %p.rarity= card.rarity
+            %p= card.rules
+            %p.pt= card.pow_tgh
 

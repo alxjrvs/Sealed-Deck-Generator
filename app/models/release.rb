@@ -28,7 +28,6 @@ class Release < ActiveRecord::Base
     commons = self.commons
     case rand(8)
     when 0
-      p "mythic"
       pack << self.mythics.sample
     else
       pack << self.rares.sample
@@ -40,7 +39,6 @@ class Release < ActiveRecord::Base
     end
     case rand(15)
     when 0
-      puts "foil"
       pack << self.cards.sample
       9.times do
         chosen = commons[rand(commons.size)]
@@ -65,4 +63,5 @@ class Release < ActiveRecord::Base
     end
     pool
   end
+
 end

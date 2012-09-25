@@ -11,7 +11,7 @@
 /db/*.sqlite3
 /public/assets/
 
-/app/assets/images/*img.jpg
+#/app/assets/images/*img.jpg
 # Ignore all logfiles and tempfiles.
 /log/*.log
 /tmp

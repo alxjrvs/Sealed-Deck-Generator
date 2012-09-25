@@ -1,6 +1,7 @@
 SealedDeckGenerator::Application.routes.draw do
 
-  match '/:short_name/:packs' => 'pool#index'
+  match '/:short_name/:packs/' => 'pool#index'
+  match '/:short_name/:packs/:secret' => 'pool#index'
 
 
 
