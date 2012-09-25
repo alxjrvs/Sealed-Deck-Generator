@@ -1,7 +1,12 @@
 class PoolController < ApplicationController
 
 def index
-  @pool = Release.first.gen_pool 6
+
+  if params[:short_name] and params[:packs]
+    @pool = Release.find_by_short_name(params[:short_name]).gen_pool(params[:packs].to_i)
+  else
+    @pool = Release.first.gen_pool 6
+  end
   pool_color  = []
   pool_rarity  = []
   @pool.flatten.each do |card|

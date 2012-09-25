@@ -4,8 +4,8 @@ require 'nokogiri'
 
   $rtr = "app/assets/html/rtr.html"
 
-  def self.scrape(set_url, set_name)
-    set = Release.create(name: set_name)
+  def self.scrape(set_url, set_name, short_name)
+    set = Release.create(name: set_name, short_name: short_name)
     doc = Nokogiri::HTML(open(set_url))
     a = {}
     doc.search('table > tr').each do |row|

@@ -1,4 +1,9 @@
 SealedDeckGenerator::Application.routes.draw do
+
+  match '/:short_name/:packs' => 'pool#index'
+
+
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
