@@ -12,7 +12,7 @@
     .booster
       %h1{:id => "booster_#{i+1}"}= "Booster #{i+1}"
       -booster.each do |card|
-        .card
+        %div{:class =>"card color_#{card.lazy_color}"}
           .type_row
             %p.name= card.name
             %p.cost= card.cost

@@ -68,8 +68,8 @@ class Card < ActiveRecord::Base
   #Black = 3
   #Red = 4
   #Green = 5
-  #Artifact = 6
-  #Multicolor = 7
+  #Multicolor = 6
+  #Artifact = 7
   #Land = 8
 
 

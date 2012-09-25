@@ -1,3 +1,4 @@
+
 div.card {
   width: 300px ;
   padding:10px;
@@ -12,11 +13,40 @@ div.card {
 .sub_head {
   font-weight: bold;
 }
+
+
+div.color_1 {
+  background-color: white;
+}
+div.color_2 {
+  background-color: #69A1F9;
+}
+div.color_3 {
+  background-color: #212121;
+  color: white;
+}
+div.color_4 {
+  background-color: #FF4238;
+}
+div.color_5 {
+  background-color: #4CE346;
+}
+div.color_6 {
+  background-color: #F2CE2C;
+}
+div.color_7 {
+}
+div.color_8 {
+  background-color: #DB8732;
+}
 div.booster {
   clear:both;
 }
 
-.type_row {clear:both; padding: 0 0 15% 0; }
+.type_row {
+  clear:both;
+  padding: 0 0 15% 0;
+}
 p.pt {position: absolute; bottom:0; right:0; padding-right:5%;}
 p.name { float:left;}
 p.type { float:left;  }
