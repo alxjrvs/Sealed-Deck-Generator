@@ -52,7 +52,7 @@ text-align: center;
   padding: 0 0 15% 0;
 }
 p.pt {position: absolute; bottom:0; right:0; padding-right:5%;}
-p.name { float:left;}
-p.type { float:left;  }
-p.rarity { text-align:right; float:right; }
-p.cost { text-align:right; float:right;  }
+p.name { float:left; width:inherit; }
+p.type { float:left; width:inherit; }
+p.rarity { text-align:right; float:right; width:inherit; }
+p.cost { text-align:right; float:right; width:inherit; }
