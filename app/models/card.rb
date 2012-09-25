@@ -18,23 +18,28 @@ class Card < ActiveRecord::Base
     color_id = []
 
     if self.cost.nil?
-      color_id << "None"
+      color_id << "Colorless"
     else
       cost.split("").each do |t|
         case t
           when "W"
+            color_id.delete("Colorless")
             color_id << "White"
           when "U"
+            color_id.delete("Colorless")
             color_id << "Blue"
           when "B"
+            color_id.delete("Colorless")
             color_id << "Black"
           when "R"
+            color_id.delete("Colorless")
             color_id << "Red"
           when "G"
+            color_id.delete("Colorless")
             color_id << "Green"
           when /\d/
             color_id = []
-            color_id << "None"
+            color_id << "Colorless"
           next
         end
       end
