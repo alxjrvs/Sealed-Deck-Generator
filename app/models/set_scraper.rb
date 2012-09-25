@@ -21,7 +21,7 @@ require 'nokogiri'
         when "Name:"
           h = { name: row.at_xpath('td[2]').text.strip }
         when "Cost:"
-          h = { cost: row.at_xpath('td[2]').text.strip }
+          h = { cost: row.at_xpath('td[2]').text.strip.upcase }
         when "Type:"
           h = { card_type: row.at_xpath('td[2]').text.strip }
         when "Rules Text:"

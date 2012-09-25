@@ -20,20 +20,21 @@ class Card < ActiveRecord::Base
     if self.cost.nil?
       color_id << "None"
     else
-      self.cost.split("").each do |t|
+      cost.split("").each do |t|
         case t
-          when "w", "W"
-          color_id << "White"
-          when "u", "U"
-          color_id << "Blue"
-          when "b", "B"
-          color_id << "Black"
-          when "r", "R"
-          color_id << "Red"
-          when "g", "G"
-          color_id << "Green"
-          else
-          color_id << "None"
+          when "W"
+            color_id << "White"
+          when "U"
+            color_id << "Blue"
+          when "B"
+            color_id << "Black"
+          when "R"
+            color_id << "Red"
+          when "G"
+            color_id << "Green"
+          when /\d/
+            color_id = []
+            color_id << "None"
           next
         end
       end
