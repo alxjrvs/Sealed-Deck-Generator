@@ -12,7 +12,7 @@
 # Ignore the default SQLite database.
 /db/*.sqlite3
 /public/assets/
-
+/app/assets/images/*
 #/app/assets/images/*img.jpg
 # Ignore all logfiles and tempfiles.
 /log/*.log
