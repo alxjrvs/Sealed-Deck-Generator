@@ -1,9 +1,7 @@
 SealedDeckGenerator::Application.routes.draw do
 
-  match '/:short_name/:packs/' => 'pool#index'
-  match '/:short_name/:packs/:secret' => 'pool#index'
-
-
+  match 'pool/:short_name/:packs/' =>'pool#card_pool', :as => :pool
+  match 'pool/:short_name/:packs/:secret' => 'pool#card_pool', :as => :pool_secret
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
