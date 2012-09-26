@@ -53,7 +53,7 @@ class Card < ActiveRecord::Base
         self.update_attributes(:lazy_rarity => 1)
       when "Rare"
         self.update_attributes(:lazy_rarity => 2)
-      when "Uncommone"
+      when "Uncommon"
         self.update_attributes(:lazy_rarity => 3)
       when "Common"
         self.update_attributes(:lazy_rarity => 4)

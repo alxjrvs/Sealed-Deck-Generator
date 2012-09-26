@@ -61,7 +61,7 @@ class Release < ActiveRecord::Base
     packs.times do
       pool << self.gen_pack
     end
-    pool
+    pool.flatten
   end
 
 end
