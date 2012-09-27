@@ -74,7 +74,7 @@ class Card < ActiveRecord::Base
 
 
   def set_lazy_color
-    if self.cost.nil?
+    if self.card_type.include? "Basic Land"
       self.update_attributes(:lazy_color => 8)
     elsif self.color.size > 1
       self.update_attributes(:lazy_color => 6)
