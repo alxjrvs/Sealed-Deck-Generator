@@ -3,41 +3,40 @@ require 'open-uri'
 require 'nokogiri'
 
   $rtr = "app/assets/html/rtr.html"
-
-  def self.scrape(set_url, set_name, short_name)
+ #http://gatherer.wizards.com/Pages/Search/Default.aspx?sort=cn+&output=spoiler&method=text&set=[%22Return%20to%20Ravnica%22]
+  def self.scrape(set_name, short_name)
     set = Release.create(name: set_name, short_name: short_name)
+    set_url = "http://gatherer.wizards.com/Pages/Search/Default.aspx?sort=cn+&output=spoiler&method=text&set=[%22#{set_name.gsub(/\s/, "%20")}%22]" 
     doc = Nokogiri::HTML(open(set_url))
     a = {}
+    #binding.pry
     doc.search('table > tr').each do |row|
-      if row.search('td').size == 1 and row.search('br').size > 0 and a.size > 3
-        card = Card.create a
-        set.cards << card
-        a = {}
-        #misses the last card.
-        #SetScraper.scrape("http://mtgsalvation.com/printable-return-to-ravnica-spoiler.html")
-      end
       if row.at_xpath('td[2]')
         case row.at_xpath('td[1]').text.strip
         when "Name:"
-          h = { name: row.at_xpath('td[2]').text.strip }
+         a.merge!({ name: row.at_xpath('td[2]').text.strip })
         when "Cost:"
-          h = { cost: row.at_xpath('td[2]').text.strip.upcase }
+          a.merge!({ cost: row.at_xpath('td[2]').text.strip.upcase })
         when "Type:"
-          h = { card_type: row.at_xpath('td[2]').text.strip }
+          a.merge!({ card_type: row.at_xpath('td[2]').text.strip })
         when "Rules Text:"
-          h = { rules: row.at_xpath('td[2]').text.strip.gsub(/\r/," ")  }
+          a.merge!({ rules: row.at_xpath('td[2]').text.strip.gsub(/\r/," ")  })
         when "Flavor Text:"
-          h = { flavor: row.at_xpath('td[2]').text.strip }
+          a.merge!({ flavor: row.at_xpath('td[2]').text.strip })
         when "Illus."
-          h = { illustrator: row.at_xpath('td[2]').text.strip }
+          a.merge!({ illustrator: row.at_xpath('td[2]').text.strip })
         when "Pow/Tgh:"
-          h = { pow_tgh: row.at_xpath('td[2]').text.strip }
-        when "Rarity:"
-          h = { rarity: row.at_xpath('td[2]').text.strip }
-        when "Set Number:"
-          h = { set_no: row.at_xpath('td[2]').text.strip }
+          a.merge!({ pow_tgh: row.at_xpath('td[2]').text.strip })
+        when "Set/Rarity:"
+          if a[:card_type].include? "Basic Land"
+            a.merge!({rarity: "Land"})
+          else
+            a.merge!({ rarity: row.at_xpath('td[2]').text.gsub(set_name, "").strip })
+          end
+          binding.pry unless Card.create a
+          set.cards << Card.last
+          a = {}
         end
-        a = a.merge(h)
       end
     end
   end

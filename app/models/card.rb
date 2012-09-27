@@ -5,7 +5,6 @@ class Card < ActiveRecord::Base
   attr_accessible :cost, :flavor, :illustrator, :name, :pow_tgh, :rarity, :rules, :set_no, :card_type, :lazy_color, :lazy_rarity, :photo, :photo_file_name, :photo_content_type, :photo_file_size, :photo_updated_at
   belongs_to :release
   #has_attached_file :scan, {}
-    
 
   def color
     color_id = []
@@ -58,7 +57,7 @@ class Card < ActiveRecord::Base
         self.update_attributes(:lazy_rarity => 3)
       when "Common"
         self.update_attributes(:lazy_rarity => 4)
-      when "Basic Land"
+      when "Land"
         self.update_attributes(:lazy_rarity => 5)
     end
   end
