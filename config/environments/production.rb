@@ -1,6 +1,10 @@
 SealedDeckGenerator::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb
 
+
+  #GA tracking code
+ GA.tracker = "UA-6951085-9"
+
   # Code is not reloaded between requests
   config.cache_classes = true
 

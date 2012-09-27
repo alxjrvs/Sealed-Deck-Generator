@@ -37,6 +37,7 @@ require 'nokogiri'
           a.merge!({ rarity: SetScraper.rarity_sort(set_name, row.at_xpath('td[2]').text) })
           Card.create a
           set.cards << Card.last
+          Card.last.update_attributes(:rarity => "Token") if Card.last.name.include? "token card"
           p "#{Card.last.name } saved to #{Card.last.release.name}"
           a = {}
         end #case row

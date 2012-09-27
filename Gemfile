@@ -32,6 +32,7 @@ group :production do
   gem 'sendgrid'
 end
 
+gem 'google-analytics-rails'
 gem 'aws-s3'
 gem 'paperclip'
 gem 'thin'

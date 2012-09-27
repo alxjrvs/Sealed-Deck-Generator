@@ -8,7 +8,6 @@ class Card < ActiveRecord::Base
 
   def color
     color_id = []
-
     if self.cost.nil?
       color_id << "Colorless"
     else
@@ -46,19 +45,24 @@ class Card < ActiveRecord::Base
   # Uncommon = 3
   # Common = 4
   # Basic Land = 5
+  # Token = 6
 
   def set_lazy_rarity
-    case self.rarity
-      when "Mythic Rare"
-        self.update_attributes(:lazy_rarity => 1)
-      when "Rare"
-        self.update_attributes(:lazy_rarity => 2)
-      when "Uncommon"
-        self.update_attributes(:lazy_rarity => 3)
-      when "Common"
-        self.update_attributes(:lazy_rarity => 4)
-      when "Land"
-        self.update_attributes(:lazy_rarity => 5)
+    if self.name.include? "token card"
+      self.update_attributes(:lazy_rarity => 6)
+    else
+      case self.rarity
+        when "Mythic Rare"
+          self.update_attributes(:lazy_rarity => 1)
+        when "Rare"
+          self.update_attributes(:lazy_rarity => 2)
+        when "Uncommon"
+          self.update_attributes(:lazy_rarity => 3)
+        when "Common"
+          self.update_attributes(:lazy_rarity => 4)
+        when "Land"
+          self.update_attributes(:lazy_rarity => 5)
+      end
     end
   end
 
@@ -74,7 +78,7 @@ class Card < ActiveRecord::Base
 
 
   def set_lazy_color
-    if self.card_type.include? "Basic Land"
+    if self.card_type.include? "Basic Land" or self.name.include? "token card"
       self.update_attributes(:lazy_color => 8)
     elsif self.color.size > 1
       self.update_attributes(:lazy_color => 6)
