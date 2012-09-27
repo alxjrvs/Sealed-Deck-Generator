@@ -6,6 +6,7 @@ class Card < ActiveRecord::Base
   belongs_to :release
   #has_attached_file :scan, {}
 
+  validates :rarity, :presence => true
   def color
     color_id = []
     if self.cost.nil?
@@ -79,7 +80,7 @@ class Card < ActiveRecord::Base
 
 
   def set_lazy_color
-    if self.card_type.include? "Basic Land" or self.name.include? "token card"
+    if self.card_type.include? "Land" or self.name.include? "token card"
       #binding.pry
       self.update_attributes(:lazy_color => 8)
     elsif self.color.size > 1
