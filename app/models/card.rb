@@ -48,6 +48,7 @@ class Card < ActiveRecord::Base
   # Token = 6
 
   def set_lazy_rarity
+
     if self.name.include? "token card"
       self.update_attributes(:lazy_rarity => 6)
     else
@@ -79,6 +80,7 @@ class Card < ActiveRecord::Base
 
   def set_lazy_color
     if self.card_type.include? "Basic Land" or self.name.include? "token card"
+      #binding.pry
       self.update_attributes(:lazy_color => 8)
     elsif self.color.size > 1
       self.update_attributes(:lazy_color => 6)
