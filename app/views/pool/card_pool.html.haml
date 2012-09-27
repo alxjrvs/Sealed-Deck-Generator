@@ -18,16 +18,13 @@
 .span10
   #pool
     -@pool.each do |card|
-      -#-if @secret
-        -#=image_tag "#{card.release.short_name.downcase}/111img.jpg"
-      -else
-        %div{:class =>"card color_#{card.lazy_color}", :rarity => "#{card.lazy_rarity}", :color => "#{card.lazy_color}"}
-          .type_row
-            %p.name= card.name
-            %p.cost= card.cost
-          .type_row
-            %p.type= card.card_type
-            %p.rarity= card.rarity
-          %p= card.rules
-          %p.pt= card.pow_tgh
+      %div{:class =>"card color_#{card.lazy_color}", :rarity => "#{card.lazy_rarity}", :color => "#{card.lazy_color}"}
+        .type_row
+          %p.name= card.name
+          %p.cost= card.cost
+        .type_row
+          %p.type= card.card_type
+          %p.rarity= card.rarity
+        %p= card.rules
+        %p.pt= card.pow_tgh
 
