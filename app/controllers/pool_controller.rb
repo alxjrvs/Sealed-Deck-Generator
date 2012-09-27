@@ -17,7 +17,7 @@ class PoolController < ApplicationController
       pool_color  = []
       pool_rarity  = []
       @pool.flatten.each do |card|
-        binding.pry
+        #binding.pry
         pool_rarity << card.rarity
         pool_color << card.color
         end
