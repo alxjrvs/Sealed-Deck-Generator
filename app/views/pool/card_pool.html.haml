@@ -25,6 +25,6 @@
         .type_row
           %p.type= card.card_type
           %p.rarity= card.rarity
-        %p= card.rules
+        %p= simple_format(card.rules)
         %p.pt= card.pow_tgh
 

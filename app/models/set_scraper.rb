@@ -11,6 +11,50 @@ require 'nokogiri'
   end #rarity_sort
 
 
+  def self.split_check(a, b, set)
+    if @b
+      if @a[:cost] == ''
+        @b[:rules] = "#{b[:rules]}\n-----\n#{@a[:name]}\n#{@a[:card_type]}\n#{@a[:rules]}\n#{@a[:pow_tgh]}"
+        card = Card.create @b
+        set.cards << card
+        @b = nil
+        @a ={:rules => ''}
+      elsif @b[:cost] == ''
+        @b = nil
+      else
+        card = Card.create @b
+        set.cards << card
+        @b = nil
+      end
+    end
+    if a[:rules].include? "transform" or a[:rules].include? "Transform"
+      @b = a
+      @a = {}
+    end
+  end
+  def self.flip_check(a, b, set)
+    if @b
+      if @a[:cost] == ''
+        @b[:rules] = "#{b[:rules]}\n-----\n#{@a[:name]}\n#{@a[:card_type]}\n#{@a[:rules]}\n#{@a[:pow_tgh]}"
+        card = Card.create @b
+        set.cards << card
+        @b = nil
+        @a ={:rules => ''}
+      elsif @b[:cost] == ''
+        @b = nil
+      else
+        card = Card.create @b
+        set.cards << card
+        @b = nil
+      end
+    end
+    if a[:name].include? "("
+      @b = a
+      @a = {}
+    end
+  end
+
+
   def self.transform_check(a, b, set)
     if @b #B represents the first half of the untransformed creature. it is set below.
       if @a[:cost] == '' #if the new card has no cost, that means it is probably the second half of a transformed creature
@@ -59,32 +103,9 @@ require 'nokogiri'
         when "Set/Rarity:"
             @a.merge!({ rarity: SetScraper.rarity_sort(set_name, row.at_xpath('td[2]').text) })
             SetScraper.transform_check(@a, @b, set)
-          #Thanks, Innistrad!
-          #This is to catch "Transform" Cards. I expect something vaguely similar with Kamigawa and split cards.
-          #if b
-            #if a[:cost] == ''
-              #b[:rules] = "#{b[:rules]}-----\n#{a[:name]}\n#{a[:card_type]}\n#{a[:rules]}\n#{a[:pow_tgh]}"
-              #Card.create b
-              #set.cards << Card.last
-              #b = nil
-              #a ={:rules => ''}
-            #else
-              #Card.create b
-              #set.cards << Card.last
-              ##a.merge!({ rarity: SetScraper.rarity_sort(set_name, row.at_xpath('td[2]').text) })
-              ##Card.create a
-              ##set.cards << Card.last
-              #b = nil
-              ##a ={}
-            #end
-          #end
-          #if a[:rules].include? "transform" or a[:rules].include? "Transform"
-            #b = a
-          #else
             Card.create @a
             Card.last.update_attributes(:rarity => "Token") if Card.last.name.include? "token card"
             set.cards << Card.last
-          #end #if rules include transform
           p "#{Card.last.name } saved to #{Card.last.release.name}"
         end #case row
       end #if row.at_xpath

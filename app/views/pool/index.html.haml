@@ -5,7 +5,7 @@
       = label_tag(:release, "Card Pool:")
       = select_tag(:release, options_for_select(@releases))
       = label_tag(:packs, "Number of Packs:")
-      = select_tag(:packs, options_for_select([6,8, 36]))
+      = select_tag(:packs, options_for_select([1,6,8,36]))
       %br 
       = submit_tag("Open", :class => 'btn btn-primary')
 %div.span4
