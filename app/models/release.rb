@@ -19,7 +19,7 @@ class Release < ActiveRecord::Base
   end
 
   def basics
-    self.cards.where("rarity = ?", "Basic Land")
+    self.cards.where("rarity = ?", "Land")
   end
 
   def gen_pack
