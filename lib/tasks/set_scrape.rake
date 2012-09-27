@@ -2,9 +2,9 @@ task :scrape => :environment do
   sets_list = [
   ["Return to Ravnica", "RTR"],
   ["Magic 2013", "M13"],
-  ["Innistrad", "ISD"],
-  ["Dark Ascension", "DKA"],
   ["Avacyn Restored", "AVR"],
+  ["Dark Ascension", "DKA"],
+  ["Innistrad", "ISD"],
   ["Magic 2012", "M12"],
   ["New Phyrexia", "NPH"],
   ["Mirrodin Besieged", "MBS"],
