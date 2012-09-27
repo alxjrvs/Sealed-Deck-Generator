@@ -32,6 +32,8 @@ group :production do
   gem 'sendgrid'
 end
 
+gem 'aws-s3'
+gem 'paperclip'
 gem 'thin'
 gem 'nokogiri'
 gem 'heroku'

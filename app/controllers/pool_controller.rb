@@ -11,16 +11,9 @@ class PoolController < ApplicationController
 
   def card_pool
     if params[:release] and params[:packs]
-      @secret = true if params[:secret] == "images"
-        @release = Release.find(params[:release])
-      case params[:sortable]
-        when "rarity"
-          @pool = @release.gen_pool(params[:packs].to_i).sort_by {|c| c.lazy_rarity}
-        when "color"
-          @pool = @release.gen_pool(params[:packs].to_i).sort_by {|c| c.lazy_color}
-        else
-          @pool = @release.gen_pool(params[:packs].to_i)
-      end
+      @secret = true if params[:secret]
+      @release = Release.find(params[:release])
+      @pool = @release.gen_pool(params[:packs].to_i)
       pool_color  = []
       pool_rarity  = []
       @pool.flatten.each do |card|

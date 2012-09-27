@@ -2,9 +2,10 @@ class Card < ActiveRecord::Base
 
   after_create :set_lazy_color, :set_lazy_rarity
 
-  attr_accessible :cost, :flavor, :illustrator, :name, :pow_tgh, :rarity, :rules, :set_no, :card_type, :lazy_color, :lazy_rarity
+  attr_accessible :cost, :flavor, :illustrator, :name, :pow_tgh, :rarity, :rules, :set_no, :card_type, :lazy_color, :lazy_rarity, :photo, :photo_file_name, :photo_content_type, :photo_file_size, :photo_updated_at
   belongs_to :release
-
+  #has_attached_file :scan, {}
+    
 
   def color
     color_id = []

@@ -1,7 +1,6 @@
 SealedDeckGenerator::Application.routes.draw do
 
   match 'pool' =>'pool#card_pool', :as => :pool
-  match 'pool//:secret' => 'pool#card_pool', :as => :pool_secret
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
