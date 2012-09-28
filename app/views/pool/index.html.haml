@@ -19,6 +19,7 @@
 .row-fluid
   %div.span4
   %div.span4
+    = render :partial => "shared/messages"
     %div.well.login_form
       = form_tag( :controller => "pool", :action => "card_pool") do
         = label_tag(:release, "Set to Open:")
