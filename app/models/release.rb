@@ -29,6 +29,43 @@ class Release < ActiveRecord::Base
     self.cards.where("rarity = ?", "Land")
   end
 
+  def gen_pack_test #For when the shit breaks!
+  pack = []
+    uncommons = self.uncommons
+    commons = self.commons
+    if self.mythicable
+      case rand(8)
+      when 0
+        pack << [self.mythics.sample, "M"]
+      else
+        pack << [self.rares.sample, "R (m)"]
+      end
+    else
+      pack << [self.rares.sample, "R"]
+    end
+    3.times do
+      chosen = uncommons[rand(uncommons.size)]
+      pack << [chosen, 'u']
+      uncommons = uncommons - [chosen]
+    end
+    case rand(15)
+    when 0
+      pack << [self.cards.sample, 'Foil']
+      9.times do
+        chosen = commons[rand(commons.size)]
+        pack << [chosen, "C (f)"]
+        commons = commons - [chosen]
+      end
+    else
+      10.times do
+        chosen = commons[rand(commons.size)]
+        pack << [chosen, "C"]
+        commons = commons - [chosen]
+      end
+    end
+    pack << [self.basics.sample, 'Basic']
+  pack
+  end
   def gen_pack
   pack = []
     uncommons = self.uncommons
@@ -63,7 +100,7 @@ class Release < ActiveRecord::Base
         commons = commons - [chosen]
       end
     end
-    pack << self.basics.sample
+    pack << self.basics.sample if self.basics != []
   pack
   end
 
