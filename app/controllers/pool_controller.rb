@@ -13,7 +13,7 @@ class PoolController < ApplicationController
 
 
   def card_pool
-    if params[:release] and params[:packs]
+    if Release.find_by_name(params[:release])
       @secret = true if params[:secret]
       @release = Release.find_by_name(params[:release])
       @pool = @release.gen_pool(params[:packs].to_i)
