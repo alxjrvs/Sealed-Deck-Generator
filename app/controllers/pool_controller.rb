@@ -1,6 +1,6 @@
 class PoolController < ApplicationController
 
- caches_page :index
+ #caches_page :index
 
   def index
     @releases = Release.all.map {|r| r.name}
@@ -29,7 +29,7 @@ class PoolController < ApplicationController
         format.json { render json: @pool }
       end
     else
-      render :action => 'index'
+      redirect_to :action => 'index'
       flash[:notice] = 'Must Supply Both Pack Size and Set.'
     end
   end
