@@ -1,6 +1,13 @@
 class Release < ActiveRecord::Base
-  attr_accessible :name, :short_name
+  attr_accessible :name, :short_name, :mythicable
   has_many :cards
+
+
+  def self.name_check
+    self.all.each do |release| 
+      puts "#{release.name} has no cards!" if release.cards == []
+    end
+  end
 
   def mythics
     self.cards.where("rarity = ?", "Mythic Rare")
@@ -26,9 +33,13 @@ class Release < ActiveRecord::Base
   pack = []
     uncommons = self.uncommons
     commons = self.commons
-    case rand(8)
-    when 0
-      pack << self.mythics.sample
+    if self.mythicable
+      case rand(8)
+      when 0
+        pack << self.mythics.sample
+      else
+        pack << self.rares.sample
+      end
     else
       pack << self.rares.sample
     end

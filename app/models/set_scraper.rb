@@ -28,7 +28,6 @@ require 'nokogiri'
       @a ={:name => ''}
     end
     if /\w* \/\/ \w*/.match(@a[:name])
-      binding.pry
       @b = @a
       @a = {}
     end
@@ -77,8 +76,8 @@ require 'nokogiri'
     end
   end
 
-  def self.scrape(set_name, short_name)
-    @set = Release.create(name: set_name, short_name: short_name)
+  def self.scrape(set_name, short_name, mythics = nil)
+    @set = Release.create(name: set_name, short_name: short_name, mythicable: mythics)
     set_url = "http://gatherer.wizards.com/Pages/Search/Default.aspx?sort=cn+&output=spoiler&method=text&set=[%22#{set_name.gsub(/\s/, "%20")}%22]"
     doc = Nokogiri::HTML(open(set_url))
     @b = nil
