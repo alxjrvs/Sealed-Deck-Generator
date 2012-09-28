@@ -10,7 +10,8 @@
     /[if lt IE 9]
       = javascript_include_tag "http://html5shim.googlecode.com/svn/trunk/html5.js"
     = stylesheet_link_tag "application", :media => "all"
-    %link(href="/favicon.ico" rel="shortcut icon")
+
+    %link(href="assets/favicon.ico" rel="shortcut icon")
     = analytics_init if Rails.env.production?
 
 
