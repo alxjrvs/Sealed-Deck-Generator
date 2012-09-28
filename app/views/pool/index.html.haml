@@ -22,7 +22,7 @@
     %div.well.login_form
       = form_tag( :controller => "pool", :action => "card_pool") do
         = label_tag(:release, "Set to Open:")
-        %input{id: "release", name: "release", type: "text", data: {provide: "typeahead", source: @releases}}
+        %input{id: "release", name: "release", type: "text", data: {provide: "typeahead", source: @releases}, placeholder: "Start Typing..."}
         -#= select_tag(:release, options_for_select(@releases))
         = label_tag(:packs, "Number of Packs:")
         = select_tag(:packs, options_for_select([1,6,8,36]))
