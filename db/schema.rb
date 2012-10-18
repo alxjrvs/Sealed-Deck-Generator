@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120928021350) do
+ActiveRecord::Schema.define(:version => 20121018203409) do
 
   create_table "cards", :force => true do |t|
     t.string   "name"
@@ -28,6 +28,7 @@ ActiveRecord::Schema.define(:version => 20120928021350) do
     t.datetime "updated_at",  :null => false
     t.integer  "lazy_color"
     t.integer  "lazy_rarity"
+    t.boolean  "dfc"
   end
 
   create_table "releases", :force => true do |t|

@@ -58,6 +58,7 @@ require 'nokogiri'
     if @b #B represents the first half of the untransformed creature. it is set below.
       if @a[:cost] == '' #if the new card has no cost, that means it is probably the second half of a transformed creature
         @b[:rules] = "#{@b[:rules]}\n-----\n#{@a[:name]}\n#{@a[:card_type]}\n#{@a[:rules]}\n#{@a[:pow_tgh]}"
+        @b[:dfc]= true
         card = Card.create @b
         @set.cards << card
         @b = nil
