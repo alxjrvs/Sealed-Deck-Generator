@@ -11,12 +11,9 @@ end
 
 group :development, :test do
   gem 'sqlite3'
-  gem 'rspec-rails'
-  gem 'rspec-pride'
+  gem 'minitest'
+  gem 'minitest-rails'
   gem 'factory_girl_rails', '~> 3.3.0'
-  gem 'factory_girl_rspec', :git => "https://github.com/chendrix/factory_girl_rspec.git"
-  gem 'rspec-subject-extensions'
-  gem 'guard-rails'
   gem "random-word"
 end
 

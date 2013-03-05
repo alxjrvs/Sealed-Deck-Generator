@@ -23,14 +23,8 @@ module SealedDeckGenerator
     # -- all .rb files in that directory are automatically loaded.
 
     config.generators do |g|
-      g.test_framework :rspec,
-        fixtures: true,
-        view_specs: false,
-        helper_specs: false,
-        routing_specs: false,
-        controller_specs: true,
-        request_specs: true
-      g.fixture_replacement :factory_girl, dir: "spec/factories"
+      g.test_framework :mini_test, spec: true, fixture: false
+      g.fixture_replacement :factory_girl, dir: "test/factories"
     end
 
     # Custom directories with classes and modules you want to be autoloadable.
